@@ -1,9 +1,13 @@
-const server = require('http').createServer((req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-});
-const io = require('socket.io')(server, {origins: '*:*'});
+const express = require('express');
+const app = express();
 
-io.origins("*:*");
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+});
+
+const server = require('http').createServer(app);
+const io = require('socket.io')(server, {origins: '*:*'});
 
 io.on('connection', (socket) => {
     console.log(`Connected to socket with id ${socket.id}`);
