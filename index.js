@@ -1,14 +1,7 @@
-const express = require('express');
-const app = express();
-
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', '*');
-    next();
+const server = require('http').createServer((req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
 });
-
-const server = require('http').createServer(app);
-const io = require('socket.io')(server);
+const io = require('socket.io')(server, {origins: '*:*'});
 
 io.origins("*:*");
 
