@@ -14,6 +14,6 @@ io.on('connection', (socket) => {
 });
 
 
-server.listen(4800, () => {
-    console.log('Server running on port 4800');
+server.listen(process.env.PORT || 4800, () => {
+    console.log(`Server running on ${process.env.PORT}`);
 });
